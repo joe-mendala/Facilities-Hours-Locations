@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facilities Hours & Locations</title>
+<style>
+  /* Basic styling */
+  body {
+    background: linear-gradient(to left, #003591, #ffffff);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  h2 {
+    text-align: center;
+  }
+  .location {
+    margin-bottom: 10px;
+  }
+  .location button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .open {
+    background-color: #55a51a;
+    color: #fff;
+  }
+  .closed {
+    background-color: #d7073a;
+    color: #fff;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      max-width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Facilities Hours & Locations</h2>
+  <div class="location" id="location1">
+    <button onclick="redirectToLink('#')" id="button1">Loading...</button>
+  </div>
+  <div class="location" id="location2">
+    <button onclick="redirectToLink('#')" id="button2">Loading...</button>
+  </div>
+  <div class="location" id="location3">
+    <button onclick="redirectToLink('#')" id="button3">Loading...</button>
+  </div>
+  <div class="location" id="location4">
+    <button onclick="redirectToLink('#')" id="button4">Loading...</button>
+  </div>
+  <div class="location" id="location5">
+    <button onclick="redirectToLink('#')" id="button5">Loading...</button>
+  </div>
+  <div class="location" id="location6">
+    <button onclick="redirectToLink('#')" id="button6">Loading...</button>
+  </div>
+  <div class="location" id="location7">
+    <button onclick="redirectToLink('#')" id="button7">Loading...</button>
+  </div>
+  <div class="location" id="location8">
+    <button onclick="redirectToLink('#')" id="button8">Loading...</button>
+  </div>
+  <div class="location" id="location9">
+    <button onclick="redirectToLink('#')" id="button9">Loading...</button>
+  </div>
+</div>
+<script>
+ // Google Calendar API credentials and calendar IDs
+ const api_key = 'AIzaSyAgGt_ZjpjvBYI1r1Zus0OWUo1Qrf14GEU'; // Replace with your Google API key
+ const calendarIds = ['mail.ic.edu_30lnrcffm8o5i0e3dti91uqce0@group.calendar.google.com', 'mail.ic.edu_sdnonbhpel70cg1u3c05cf7vak@group.calendar.google.com', 'mail.ic.edu_tv4oq9n41bbibej801ervep21k@group.calendar.google.com', 'mail.ic.edu_h84itdej6her57ojp1ui46tka4@group.calendar.google.com', 'mail.ic.edu_ei84k6aosfnmbdg3ihjdmufolg@group.calendar.google.com', 'mail.ic.edu_3r2jo1q817egmiquo93vfakst8@group.calendar.google.com', 'mail.ic.edu_gqnlq8l1g98gue0ufvhdpvn1ok@group.calendar.google.com', 'mail.ic.edu_ctmsmtgp9ehmgrsv7f9r6etbu4@group.calendar.google.com', 'mail.ic.edu_q0874adt9a8qmeh9glathj0kas@group.calendar.google.com'];
+ const calendarNames = ['Chesley Health & Wellness Center', 'Schewe Library', 'Bruner Fitness & Recreation Center', 'Bruner Pool', 'Mail Services','IT Service Desk', 'IC Store', 'HUB Tech Center', 'Bruner Weight Room'];
+
+ // Function to fetch events from Google Calendar API
+ function fetchEvents(calendarId, buttonId, calendarName) {
+   const now = new Date();
+   const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${api_key}&timeMin=${now.toISOString()}&singleEvents=true&orderBy=startTime`;
+
+   fetch(url)
+     .then(response => response.json())
+     .then(data => {
+       console.log('Events for calendar', calendarId, ':', data.items);
+       const events = data.items || [];
+       const activeEvents = events.filter(event => {
+         const start = new Date(event.start.dateTime || event.start.date);
+         const end = new Date(event.end.dateTime || event.end.date);
+         return start <= now && now <= end; // Check if current time is between start and end time of event
+       });
+       console.log('Active events:', activeEvents);
+       const isOpen = activeEvents.length > 0;
+       const button = document.getElementById(buttonId);
+       if (isOpen) {
+         button.innerHTML = `${calendarName} - Open Now`;
+         button.classList.add('open');
+       } else {
+         button.innerHTML = `${calendarName} - Closed Now`;
+         button.classList.add('closed');
+       }
+     })
+     .catch(error => console.error('Error fetching events:', error));
+ }
+
+ function redirectToLink(link) {
+   window.location.href = link;
+ }
+
+ // Fetch events for each calendar
+ calendarIds.forEach((calendarId, index) => {
+   fetchEvents(calendarId, `button${index + 1}`, calendarNames[index]);
+ });
+</script>
+</body>
+</html>
