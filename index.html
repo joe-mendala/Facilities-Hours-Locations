@@ -34,6 +34,20 @@
     cursor: pointer;
     border-radius: 5px;
   }
+  .hours {
+    display: none; /* Hide the hours initially */
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin-top: 5px;
+    text-align: justify;
+  }
+  #hours4 li {
+    font-size: 12px;
+  }
+  #hours7 {
+    font-size: 15.5px;
+  }
   .open {
     background-color: #55a51a;
     color: #fff;
@@ -54,31 +68,100 @@
 <div class="container">
   <h2>Facilities Hours & Locations</h2>
   <div class="location" id="location1">
-    <button onclick="redirectToLink('#')" id="button1">Loading...</button>
+    <button id="button1" onclick="toggleHours(1)">Loading...</button>
+    <div class="hours" id="hours1">
+        <b>Location:</b> Lincoln Hall
+        <br>
+        <hr>
+        <u>Clinic Hours:</u>
+        <li>Monday - Friday 8 a.m. - 1 p.m.</li>
+        <br>
+        <u>Health Questions:</u> 
+        <li>Monday - Friday 2 p.m. to 5 p.m.</li></div>
   </div>
   <div class="location" id="location2">
-    <button onclick="redirectToLink('#')" id="button2">Loading...</button>
+    <button id="button2" onclick="toggleHours(2)">Loading...</button>
+    <div class="hours" id="hours2">
+        <b>Location:</b> Schewe Library
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Thursday | 7:45 a.m. to 11 p.m.</li>
+        <li>Friday | 7:45 a.m to 4 p.m.</li>
+        <li>Saturday | 3 to 6 p.m.</li>
+        <li>Sunday | 3 to 11 p.m.</li>
+    </div>
   </div>
   <div class="location" id="location3">
-    <button onclick="redirectToLink('#')" id="button3">Loading...</button>
+    <button id="button3" onclick="toggleHours(3)">Loading...</button>
+    <div class="hours" id="hours3">
+        <b>Location:</b> Bruner center 
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Thursday | 6 a.m. to 10 p.m.</li>
+        <li>Friday | 6 a.m to 8 p.m.</li>
+        <li>Saturday & Sunday | 11 a.m. to 4 p.m.</li>
+    </div>
   </div>
   <div class="location" id="location4">
-    <button onclick="redirectToLink('#')" id="button4">Loading...</button>
+    <button id="button4" onclick="toggleHours(4)">Loading...</button>
+    <div class="hours" id="hours4">
+        <b>Location:</b> Bruner Center -- Behind Locker Rooms
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Thurs. | 6 to 7:45 a.m., 11 a.m. to 1 p.m., 4 p.m. to 10 p.m.</li>
+        <li>Friday | 6 a.m. to 7:45 a.m., 11 a.m. to 1 p.m., 4 p.m. to 8 p.m.</li>
+        <li>Saturday | <b>CLOSED</b></li>
+        <li>Sunday | 11 a.m. to 4 p.m.</li></div>
   </div>
   <div class="location" id="location5">
-    <button onclick="redirectToLink('#')" id="button5">Loading...</button>
+    <button id="button5" onclick="toggleHours(5)">Loading...</button>
+    <div class="hours" id="hours5">Hours of Operation: To be added</div>
   </div>
   <div class="location" id="location6">
-    <button onclick="redirectToLink('#')" id="button6">Loading...</button>
+    <button id="button6" onclick="toggleHours(6)">Loading...</button>
+    <div class="hours" id="hours6">
+        <b>Location:</b> Kirby Learning Center; Room 12
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Friday: 8 a.m. to 5 p.m.</div>
   </div>
   <div class="location" id="location7">
-    <button onclick="redirectToLink('#')" id="button7">Loading...</button>
+    <button id="button7" onclick="toggleHours(7)">Loading...</button>
+    <div class="hours" id="hours7">
+        <b>Location:</b> Caine Student Center; across from CSEIB
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Friday: 9 a.m. to 4 p.m.</div>
   </div>
   <div class="location" id="location8">
-    <button onclick="redirectToLink('#')" id="button8">Loading...</button>
+    <button id="button8" onclick="toggleHours(8)">Loading...</button>
+    <div class="hours" id="hours8">Hours of Operation: To be added</div>
   </div>
   <div class="location" id="location9">
-    <button onclick="redirectToLink('#')" id="button9">Loading...</button>
+    <button id="button9" onclick="toggleHours(9)">Loading...</button>
+    <div class="hours" id="hours9">
+        <b>Location:</b> Bruner Main Floor -- Near Elevator / Stairs
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Friday: 8 a.m. to 5 p.m.</li>
   </div>
 </div>
 <script>
@@ -116,8 +199,10 @@
      .catch(error => console.error('Error fetching events:', error));
  }
 
- function redirectToLink(link) {
-   window.location.href = link;
+ // Function to toggle the display of hours when button is clicked
+ function toggleHours(locationIndex) {
+   const hoursDiv = document.getElementById(`hours${locationIndex}`);
+   hoursDiv.style.display = hoursDiv.style.display === 'block' ? 'none' : 'block';
  }
 
  // Fetch events for each calendar
