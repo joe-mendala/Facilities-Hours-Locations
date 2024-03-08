@@ -198,11 +198,27 @@
      .catch(error => console.error('Error fetching events:', error));
  }
 
- // Function to toggle the display of hours when button is clicked
- function toggleHours(locationIndex) {
-   const hoursDiv = document.getElementById(`hours${locationIndex}`);
-   hoursDiv.style.display = hoursDiv.style.display === 'block' ? 'none' : 'block';
- }
+ let lastClickedLocationIndex = null; // Store the index of the last clicked location
+
+  // Function to close the hours menu for the last clicked button
+  function closeLastHoursMenu() {
+    if (lastClickedLocationIndex !== null) {
+      const lastHoursDiv = document.getElementById(`hours${lastClickedLocationIndex}`);
+      lastHoursDiv.style.display = 'none';
+    }
+  }
+
+  // Function to toggle the display of hours when button is clicked
+  function toggleHours(locationIndex) {
+    const hoursDiv = document.getElementById(`hours${locationIndex}`);
+    if (hoursDiv.style.display === 'block') {
+      hoursDiv.style.display = 'none'; // If the hours box is already open, close it
+    } else {
+      closeLastHoursMenu(); // Close the hours menu for the last clicked button
+      hoursDiv.style.display = 'block'; // Open the hours box for the clicked button
+    }
+    lastClickedLocationIndex = locationIndex; // Update the last clicked location index
+  }
 
  // Fetch events for each calendar
  calendarIds.forEach((calendarId, index) => {
