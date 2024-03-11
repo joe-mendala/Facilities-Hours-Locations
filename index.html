@@ -42,10 +42,10 @@
     content: "";
     position: absolute;
     top: 35%;
-    right: 25px; /* Adjusted position to be closer to the right side */
+    right: 13px; /* Adjusted position to be closer to the right side */
     transform: translate(0, -50%); /* Adjusted to center vertically */
-    width: 10px;
-    height: 10px;
+    width: 10.5px;
+    height: 10.5px;
     border-radius: 50%;
     background-color: #fff;
     animation: pulse 1.5s infinite ease-out;
@@ -89,9 +89,26 @@
     color: #fff;
   }
   /* Responsive adjustments */
+  @media (max-width: 388px) {
+    .location button {
+        font-size: 12px;
+    }
+    .location button::after {
+        top: 40%; /* Adjust the vertical position of the pulsating icon */
+        right: 5px; /* Adjust the horizontal position of the pulsating icon */
+        width: 6px; /* Reduce the size of the pulsating icon */
+        height: 6px; /* Reduce the size of the pulsating icon */
+    }
+  }
   @media (max-width: 768px) {
     .container {
       max-width: 90%;
+    }
+    .location button {
+      font-size: 14px;
+    }
+    .hours li {
+      font-size: 10px;
     }
   }
 </style>
