@@ -33,6 +33,35 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    position: relative;
+  }
+  .location button.active::after {
+    background-color: black; /* Change color for active button */
+  }
+  .location button::after {
+    content: "";
+    position: absolute;
+    top: 35%;
+    right: 25px; /* Adjusted position to be closer to the right side */
+    transform: translate(0, -50%); /* Adjusted to center vertically */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: pulse 1.5s infinite ease-out;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
   }
   .hours {
     display: none; /* Hide the hours initially */
@@ -43,7 +72,7 @@
     text-align: justify;
   }
   #hours4 li {
-    font-size: 12.75px;
+    font-size: 12.6px;
   }
   #hours7 {
     font-size: 15.5px;
@@ -69,7 +98,7 @@
 </head>
 <body>
 <div class="container">
-  <h2>Facilities Hours & Locations</h2>
+  <h2><u>Facilities Hours & Locations</u></h2>
   <div class="location" id="location1">
     <button id="button1" onclick="toggleHours(1)">Loading...</button>
     <div class="hours" id="hours1">
@@ -129,7 +158,16 @@
   </div>
   <div class="location" id="location5">
     <button id="button5" onclick="toggleHours(5)">Loading...</button>
-    <div class="hours" id="hours5">Hours of Operation: To be added</div>
+    <div class="hours" id="hours5">
+        <b>Location:</b> Baxter Hall
+        <br>
+        <hr>
+        <u>Hours:</u>
+        <br>
+        <br>
+        <li>Monday - Friday | 8:30 a.m. to Noon; 1 to 4 p.m.
+        <li>Saturday & Sunday | <b>Closed</b></li>
+    </div>
   </div>
   <div class="location" id="location6">
     <button id="button6" onclick="toggleHours(6)">Loading...</button>
@@ -220,16 +258,24 @@
   }
 
   // Function to toggle the display of hours when button is clicked
-  function toggleHours(locationIndex) {
-    const hoursDiv = document.getElementById(`hours${locationIndex}`);
-    if (hoursDiv.style.display === 'block') {
-      hoursDiv.style.display = 'none'; // If the hours box is already open, close it
-    } else {
-      closeLastHoursMenu(); // Close the hours menu for the last clicked button
-      hoursDiv.style.display = 'block'; // Open the hours box for the clicked button
+function toggleHours(locationIndex) {
+  const hoursDiv = document.getElementById(`hours${locationIndex}`);
+  const currentButton = document.getElementById(`button${locationIndex}`);
+  
+  if (hoursDiv.style.display === 'block') {
+    hoursDiv.style.display = 'none'; // If the hours box is already open, close it
+    currentButton.classList.remove('active'); // Remove "active" class from button
+  } else {
+    closeLastHoursMenu(); // Close the hours menu for the last clicked button
+    hoursDiv.style.display = 'block'; // Open the hours box for the clicked button
+    currentButton.classList.add('active'); // Add "active" class to button
+    if (lastClickedLocationIndex !== null) {
+      const lastButton = document.getElementById(`button${lastClickedLocationIndex}`);
+      lastButton.classList.remove('active'); // Remove "active" class from previously clicked button
     }
-    lastClickedLocationIndex = locationIndex; // Update the last clicked location index
   }
+  lastClickedLocationIndex = locationIndex; // Update the last clicked location index
+}
 
  // Fetch events for each calendar
  calendarIds.forEach((calendarId, index) => {
