@@ -37,6 +37,12 @@
   }
   .location button.active::after {
     background-color: black; /* Change color for active button */
+    animation: none; 
+    width: 15px;
+    height: 15px;
+    top: 50%;
+    right: 13px; /* Adjusted position to be closer to the right side */
+    transform: translate(0, -50%);
   }
   .location button::after {
     content: "";
