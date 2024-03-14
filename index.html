@@ -7,7 +7,15 @@
 <style>
   /* Basic styling */
   body {
-    background: linear-gradient(to left, #003591, #ffffff);
+    background-image: linear-gradient(45deg, rgb(0,53,145) 0%, rgb(0,53,145) 24%,rgb(0,53,145) 24%,
+     rgb(0,53,145) 28%,rgb(0,53,145) 28%, rgb(0,53,145) 40%,rgb(129,138,144) 40%, rgb(129,138,144) 84%,
+     rgb(0,53,145) 84%, rgb(0,53,145) 100%),linear-gradient(0deg, rgb(0,53,145) 0%, rgb(0,53,145) 24%,rgb(0,53,145) 
+     24%, rgb(0,53,145) 28%,rgb(0,53,145) 28%, rgb(0,53,145) 40%,rgb(129,138,144) 40%, rgb(129,138,144) 84%,rgb(0,53,145) 84%,
+      rgb(0,53,145) 100%),linear-gradient(135deg, rgb(0,53,145) 0%, rgb(0,53,145) 24%,rgb(0,53,145) 24%, rgb(0,53,145) 28%,rgb(0,53,145) 28%,
+       rgb(0,53,145) 40%,rgb(129,138,144) 40%, rgb(129,138,144) 84%,rgb(0,53,145) 84%, rgb(0,53,145) 100%),linear-gradient(90deg, rgb(129,138,144),
+       rgb(129,138,144)); 
+       background-blend-mode:overlay,overlay,overlay,normal;
+    background-attachment: fixed; /* Fix the background position */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -16,12 +24,19 @@
     max-width: 430px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 2.5px solid #ccc;
     border-radius: 10px;
   }
   h2 {
     text-align: center;
-  }
+    margin-bottom: 20px; /* Keep the margin at the bottom */
+    margin-top: 0; /* Remove the margin at the top */
+    color: #ffffff; /* Specify the color of the title */
+    text-shadow: -1px -1px 0 #000,  
+                  1px -1px 0 #000,
+                  -1px 1px 0 #000,
+                  1px 1px 0 #000;
+  } 
   .location {
     margin-bottom: 10px;
   }
@@ -109,6 +124,7 @@
   @media (max-width: 768px) {
     .container {
       max-width: 90%;
+      border: none;
     }
     .location button {
       font-size: 14px;
@@ -278,23 +294,29 @@
   }
 
   // Function to toggle the display of hours when button is clicked
-function toggleHours(locationIndex) {
+  function toggleHours(locationIndex) {
   const hoursDiv = document.getElementById(`hours${locationIndex}`);
   const currentButton = document.getElementById(`button${locationIndex}`);
   
-  if (hoursDiv.style.display === 'block') {
-    hoursDiv.style.display = 'none'; // If the hours box is already open, close it
-    currentButton.classList.remove('active'); // Remove "active" class from button
-  } else {
-    closeLastHoursMenu(); // Close the hours menu for the last clicked button
-    hoursDiv.style.display = 'block'; // Open the hours box for the clicked button
-    currentButton.classList.add('active'); // Add "active" class to button
-    if (lastClickedLocationIndex !== null) {
-      const lastButton = document.getElementById(`button${lastClickedLocationIndex}`);
-      lastButton.classList.remove('active'); // Remove "active" class from previously clicked button
+  if (hoursDiv) { // Check if the hoursDiv element exists
+    if (hoursDiv.style.display === 'block') {
+      hoursDiv.style.display = 'none'; // If the hours box is already open, close it
+      currentButton.classList.remove('active'); // Remove "active" class from button
+    } else {
+      closeLastHoursMenu(); // Close the hours menu for the last clicked button
+      hoursDiv.style.display = 'block'; // Open the hours box for the clicked button
+      currentButton.classList.add('active'); // Add "active" class to button
+      if (lastClickedLocationIndex !== null) {
+        const lastButton = document.getElementById(`button${lastClickedLocationIndex}`);
+        if (lastButton && lastClickedLocationIndex !== locationIndex) { // Check if the lastButton element exists and it's not the same button clicked again
+          lastButton.classList.remove('active'); // Remove "active" class from previously clicked button
+        }
+      }
     }
+    lastClickedLocationIndex = locationIndex; // Update the last clicked location index
+  } else {
+    console.error(`Hours element with ID 'hours${locationIndex}' not found.`);
   }
-  lastClickedLocationIndex = locationIndex; // Update the last clicked location index
 }
 
  // Fetch events for each calendar
