@@ -40,7 +40,10 @@
     margin-bottom: 10px;
   }
   .location button {
-    display: block;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Arrange content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
     width: 100%;
     padding: 10px;
     text-align: center;
@@ -126,7 +129,74 @@
       border: none;
     }
     .location button {
-      font-size: 14px;
+      font-size: 12px;
+    }
+  }
+  @media (max-width:430px) {
+    .location button {
+      font-size: 13px;
+    }
+  }
+  /* Adjustments for iPhone SE */
+  @media (max-width: 320px) {
+    .location button {
+        font-size: 11px; /* Adjust font size for iPhone SE */
+    }
+  }
+
+  /* Adjustments for iPhone 6/7/8/SE (2nd generation) */
+  @media (min-width: 321px) and (max-width: 375px) {
+    .location button {
+        font-size: 12px; /* Adjust font size for iPhone 6/7/8/SE (2nd generation) */
+    }
+  }
+
+  /* Adjustments for iPhone 6/7/8 Plus */
+  @media (min-width: 376px) and (max-width: 414px) {
+    .location button {
+        font-size: 13px; /* Adjust font size for iPhone 6/7/8 Plus */
+    }
+  }
+
+  /* Adjustments for iPhone X/XS/11 Pro */
+  @media (min-width: 375px) and (max-width: 812px) {
+    .location button {
+        font-size: 14px; /* Adjust font size for iPhone X/XS/11 Pro */
+    }
+  }
+
+  /* Adjustments for iPhone XR/11 */
+  @media (min-width: 414px) and (max-width: 896px) {
+    .location button {
+        font-size: 14px; /* Adjust font size for iPhone XR/11 */
+    }
+  }
+
+  /* Adjustments for iPhone XS Max/11 Pro Max */
+  @media (min-width: 414px) and (max-width: 896px) {
+    .location button {
+        font-size: 15px; /* Adjust font size for iPhone XS Max/11 Pro Max */
+    }
+  }
+
+  /* Adjustments for iPhone 12/13/13 Pro */
+  @media (min-width: 390px) and (max-width: 844px) {
+    .location button {
+        font-size: 14px; /* Adjust font size for iPhone 12/13/13 Pro */
+    }
+  }
+
+  /* Adjustments for iPhone 12 Mini */
+  @media (min-width: 360px) and (max-width: 780px) {
+    .location button {
+        font-size: 12px; /* Adjust font size for iPhone 12 Mini */
+    }
+  }
+
+  /* Adjustments for iPhone 12 Pro Max/13 Pro Max */
+  @media (min-width: 428px) and (max-width: 926px) {
+    .location button {
+        font-size: 16px; /* Adjust font size for iPhone 12 Pro Max/13 Pro Max */
     }
   }
 </style>
