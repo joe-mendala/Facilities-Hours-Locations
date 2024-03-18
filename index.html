@@ -13,7 +13,7 @@
                       linear-gradient(0deg, rgb(129,138,144), rgb(129,138,144));
     background-blend-mode: overlay, overlay, overlay, normal;
     background-attachment: fixed;
-    background-position: 90px 75px;
+    background-position: 90px 130px;
     background-size: fixed;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -22,7 +22,7 @@
   .container {
     max-width: 430px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 10px;
     border: 2.5px solid #ccc;
     border-radius: 10px;
   }
@@ -35,6 +35,7 @@
                   1px -1px 0 #000,
                   -1px 1px 0 #000,
                   1px 1px 0 #000;
+    font-size: 2.55em;
   } 
   .location {
     margin-bottom: 10px;
@@ -122,6 +123,55 @@
         width: 6px; /* Reduce the size of the pulsating icon */
         height: 6px; /* Reduce the size of the pulsating icon */
     }
+    .location button.active::after {
+    background-color: black; /* Change color for active button */
+    animation: none; 
+    width: 6px;
+    height: 6px;
+    top: 50%;
+    right: 5px; /* Adjusted position to be closer to the right side */
+    transform: translate(0, -50%);
+    }
+  }
+  @media (max-width: 430px) {
+    .location button {
+        font-size: 12px;
+    }
+    .location button::after {
+        top: 40%; /* Adjust the vertical position of the pulsating icon */
+        right: 5px; /* Adjust the horizontal position of the pulsating icon */
+        width: 6px; /* Reduce the size of the pulsating icon */
+        height: 6px; /* Reduce the size of the pulsating icon */
+    }
+    .location button.active::after {
+    background-color: black; /* Change color for active button */
+    animation: none; 
+    width: 6px;
+    height: 6px;
+    top: 50%;
+    right: 5px; /* Adjusted position to be closer to the right side */
+    transform: translate(0, -50%);
+    }
+  }
+  @media (max-width: 444px) {
+    .location button {
+        font-size: 12px;
+    }
+    .location button::after {
+        top: 40%; /* Adjust the vertical position of the pulsating icon */
+        right: 5px; /* Adjust the horizontal position of the pulsating icon */
+        width: 6px; /* Reduce the size of the pulsating icon */
+        height: 6px; /* Reduce the size of the pulsating icon */
+    }
+    .location button.active::after {
+    background-color: black; /* Change color for active button */
+    animation: none; 
+    width: 6px;
+    height: 6px;
+    top: 50%;
+    right: 5px; /* Adjusted position to be closer to the right side */
+    transform: translate(0, -50%);
+    }
   }
   @media (max-width: 768px) {
     .container {
@@ -138,9 +188,9 @@
     }
   }
   /* Adjustments for iPhone SE */
-  @media (max-width: 320px) {
+  @media (min-width: 375px) and (max-width: 667px) {
     .location button {
-        font-size: 11px; /* Adjust font size for iPhone SE */
+        font-size: 13px; /* Adjust font size for iPhone SE */
     }
   }
 
@@ -182,7 +232,7 @@
   /* Adjustments for iPhone 12/13/13 Pro */
   @media (min-width: 390px) and (max-width: 844px) {
     .location button {
-        font-size: 14px; /* Adjust font size for iPhone 12/13/13 Pro */
+        font-size: 16px; /* Adjust font size for iPhone 12/13/13 Pro */
     }
   }
 
@@ -197,6 +247,13 @@
   @media (min-width: 428px) and (max-width: 926px) {
     .location button {
         font-size: 16px; /* Adjust font size for iPhone 12 Pro Max/13 Pro Max */
+    }
+  } 
+
+  /* Adjustments for Samsung Galaxy S20 Ultra */
+  @media (min-width: 360px) and (max-width: 915px) {
+    .location button {
+        font-size: 16px;
     }
   }
 </style>
